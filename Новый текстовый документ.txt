@@ -1,0 +1,13 @@
+Product list
+	Drinks  
+	-Coca-Cola(0.5)(300 dr)
+	-Fanta(0.5)(300 dr)
+	-Sprite(0.5)(300 dr)
+	Chipsi
+	-Lays(80 g)(500 dr)
+	-Cheetos(85 g)(800 dr)
+	-Doritos(77 g)(550 dr)
+	Choclate
+	-Snickers(55 g)(250 dr)
+	-Mars(50 g)(250 dr)
+	-KitKat(45 g)(200 dr)
