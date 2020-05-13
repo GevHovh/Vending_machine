@@ -87,8 +87,6 @@ def select_product():
 			st = True
 		return int(int(order_number) - 1)
 
-
-
 def input_money():
 	'''Gives opportuniy to input coins and counts final amount'''
 	list_of_aviable_coins = [50, 100, 200, 500]
@@ -100,9 +98,6 @@ def input_money():
 		else:
 			input_coin = Coin(int(input_coin_value))
 			input_coin_list.append(input_coin)
-
-		
-
 	list_of_aviable_coins = [50, 100, 200, 500]
 	input_coin_list = []
 	total_money = []
@@ -123,6 +118,20 @@ def info(product):
 	elif isinstance(product, (Chips, Choclate)):
 		print(str(product.product_name) + " " +  str(product.grams) + 'g')
 	print('Price is ' + str(product.price))
+
+def order_process(order_number,money):
+	stt = False
+	while stt == False:
+		if money >= list_of_products[order_number].price:
+			print('Sucess, you can take your order')
+			print('Your balance is ' + str(money - list_of_products[order_number].price))
+			stt = True
+			sql = 'UPDATE dispenser.products_left SET `left` = `left` - 1 WHERE `product` = %s'
+			mycursor.execute(sql,(list_of_products[order_number].product_name,))
+			mydb.commit()
+		else:
+			print('Sry, you have no enough balance')
+			print('Take your money back')
 
 #Add some drinks		
 coca_cola =  Drinks(product_name = 'Coca-Cola', litre = 0.5, price = 300)
@@ -147,16 +156,5 @@ print('Welcome to the secret shop\nYou can buy:\n')
 for i in range(9):
 	print(str(i+1) + ':' + str(list_of_products[i].product_name) + ' Left - ' + str(list_of_products[i].left))
 
-'''order_number = select_product()
-info(list_of_products[order_number])
-stt = False
-while stt == False:
-	money = input_money()
-	if money >= list_of_products[order_number].price:
-		print('Sucess, you can take your order')
-		print('Your balance is ' + str(money - list_of_products[order_number].price))
-		stt = True
-	else:
-		print('Sry, you have no enough balance')
-		print('Take your money back')'''
-		
+order_process(order_number = select_product(), money = input_money())
+
